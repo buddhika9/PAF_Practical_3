@@ -9,7 +9,7 @@ import com.items.util.*;
 
 import com.items.util.DBConnect;
 
-public class itemsDAAOimpl  {
+public class itemsDAAOimpl implements ItemsDAO  {
 
 	public String insertItem(String code, String name, String price, String desc) {
 		
