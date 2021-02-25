@@ -8,8 +8,11 @@ import java.sql.Statement;
 import com.items.util.*;
 
 import com.items.util.DBConnect;
+import com.mysql.cj.Session;
 
 public class itemsDAAOimpl implements ItemsDAO  {
+
+	private static final String String = null;
 
 	public String insertItem(String code, String name, String price, String desc) {
 		
@@ -95,10 +98,14 @@ public class itemsDAAOimpl implements ItemsDAO  {
 					output += "<td>" + itemDesc + "</td>";
 					// buttons
 					output += "<td><input name='btnUpdate' " + " type='button' value='Update'></td>"
-					+ "<td><form method='post' action='AddItems.jsp'>"
-					+ "<input name='btnRemove' "+ " type='submit' value='Remove'>"
+					
+					+ "<td><form method='post' action= 'Delete'>"					
+					+ "<input name='btnRemove' "
+					+ " type='submit' value='Remove'>"													
 					+ "<input name='ItemID' type='hidden' "
-					+ " value='" + itemID + "'>" + "</form></td></tr>";
+					+ " value='" + itemID + "'>" 
+					
+					+ "</form></td></tr>";
 				}
 					con.close();
 					// Complete the html table
@@ -111,6 +118,29 @@ public class itemsDAAOimpl implements ItemsDAO  {
 					}
 					return output;	
 		}
+	
+	public boolean Deleteitems(String itemid) {
+		
+		boolean isSuccess = false;
+		
+		try
+		{
+			Connection con = DBConnect.DBconnection();			
+			String query =" delete from  item where ItemID='"+itemid+"' ";			
+			Statement st = con.createStatement();
+			int r = st.executeUpdate(query);
+			
+			if(r>0) {
+				
+				isSuccess = true;
+			}
+			
+		
+		}catch(Exception e){
+			
+		}
+		return isSuccess;		
+	}
 	
 	
 	

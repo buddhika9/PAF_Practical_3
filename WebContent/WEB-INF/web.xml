@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+   <servlet>
+	    	<servlet-name>Delete</servlet-name>
+	    	<servlet-class>com.items.Servlet.ItemsController</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	    	<servlet-name>Delete</servlet-name>
+	    	<url-pattern>/Delete</url-pattern>
+	    </servlet-mapping>
+
+
+</web-app>

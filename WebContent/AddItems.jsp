@@ -38,7 +38,8 @@ if (request.getParameter("ItemCode") != null)
 		out.print(session.getAttribute("statusMsg"));
 		itemsDAAOimpl itemObj = new itemsDAAOimpl();
         out.print(itemObj.readItems());
-
+        
+     
 %>
 </body>
 </html>
