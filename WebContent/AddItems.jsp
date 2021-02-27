@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@page import="com.items.util.*" %>
-  <%@page import="com.items.DAO.*" %>
+
  
  <%
 if (request.getParameter("ItemCode") != null)
 {
-		itemsDAAOimpl itemObj = new itemsDAAOimpl();
+		DBConnect itemObj = new DBConnect();
 		
 		String stsMsg = itemObj.insertItem(request.getParameter("ItemCode"),
 		request.getParameter("ItemName"),
@@ -15,6 +15,14 @@ if (request.getParameter("ItemCode") != null)
 		
 		session.setAttribute("statusMsg", stsMsg);
 }
+ 
+ 
+ if(request.getParameter("ItemID") != null){
+	 
+	 DBConnect deleteitem = new DBConnect();
+	 String result = deleteitem.DeleteItems(request.getParameter("ItemID"));
+	 session.setAttribute("result", result);
+ } 
 %>
 <!DOCTYPE html>
 <html>
@@ -35,8 +43,15 @@ if (request.getParameter("ItemCode") != null)
 	</form>
 
 <%
-		out.print(session.getAttribute("statusMsg"));
-		itemsDAAOimpl itemObj = new itemsDAAOimpl();
+
+
+
+			out.print(session.getAttribute("statusMsg"));
+if(request.getParameter("ItemID") != null){
+			out.print(session.getAttribute("result"));
+		
+}	
+		DBConnect itemObj = new DBConnect();
         out.print(itemObj.readItems());
         
      
