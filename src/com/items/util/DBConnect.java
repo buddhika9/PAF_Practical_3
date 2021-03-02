@@ -118,18 +118,18 @@ public class DBConnect {
 				
 				
 				// update buttons
-				output += "<td><form method='post' action= 'AddItems.jsp'>"
-						+ "	<input name='btnUpdate' type='submit' value='Update'>"
+				output += "<td><form method='post' action='AddItems.jsp'>"						
 						+ "<input name='ItemID' type='hidden' "
-						+ " value='" + itemID + "'>" 																					
+						+ " value='" + itemID + "'>" 
+						+ "<input name='btnUpdate' type='submit' value='Update'>"
 						+"</form></td>"
+						
+					
 					
 				//delete button
 						+ "<td><form method='post' action= 'AddItems.jsp'>"					
 						+ "<input name='btnRemove' "
 						+ " type='submit' value='Remove'>"	
-						+ "<input name='action' type='hidden' "
-						+ " value='delete'>" 
 						+ "<input name='ItemID' type='hidden' "
 						+ " value='" + itemID + "'>" 
 						
@@ -199,22 +199,24 @@ public class DBConnect {
     		return "Error while connecting to the database for reading.";
     	}	
 			
-			String querry = "Update item set ItemCode = ? , ItemName = ? ,ItemPrice = ? , ItemDesc = ? Where ItemID =?";
+			String querry = "Update item set ItemCode = ? , ItemName = ? , ItemPrice = ? , ItemDesc = ?  "+"Where ItemID = ?";
+    	   
 			//create a prepared statement
 			PreparedStatement preparedstmt = con.prepareStatement(querry);
 			  
 			//binding values
 			  preparedstmt.setString(1,code );
 			  preparedstmt.setString(2, name);
-			  preparedstmt.setDouble(4, Double.parseDouble(price));
-			  preparedstmt.setString(5, desc);
-			  preparedstmt.setInt(5, itemid);
+			  preparedstmt.setDouble(3, Double.parseDouble(price));
+			  preparedstmt.setString(4, desc);
+			  preparedstmt.setInt(5,  itemid);
 			  
 			//execute the statement
 			  preparedstmt.execute();
+			
 			  con.close();
 			  output = "Updated successfully..";
-		
+			 
 		
 		}catch(Exception e){
 			output = "Error in updating details...";
@@ -254,15 +256,13 @@ public class DBConnect {
 				String itemPrice = Double.toString(rs.getDouble("ItemPrice"));
 				String itemDesc = rs.getString("ItemDesc");
 				
-				output += "<form method=post action=AddItems.jsp>"
-						+ " <input name='action' value='update' type='hidden'>"
-						+ " Item ID: '"+itemID+ "'<br>"
-					    + "	Item code: <input name='ItemCode' type='text' value = ''><br>"
-						+ " Item name: <input name='ItemName' type='text'><br>"
-						+ " Item price: <input name='ItemPrice' type='text'><br>"
-						+ " Item description: <input name='ItemDesc' type='text'><br>"
+				output += "<form method=post action='AddItems.jsp'>"
+					    + "	Item code: <input name='ItemCode' type='text' value = '"+itemCode+"' ><br>"
+						+ " Item name: <input name='ItemName' type='text' value = '"+itemName+"' ><br>"
+						+ " Item price: <input name='ItemPrice' type='text'  value = '"+itemPrice+"'><br>"
+						+ " Item description: <input name='ItemDesc' type='text'  value = '"+itemDesc+"'><br>"
 						+ " <input name='ItemID' type='hidden' value='" + itemID + "'>"
-						+ " <input name='btnSubmit' type='submit' value=Update >"
+						+ " <input name='btnSubmit' type='submit' value= 'Update' >"
 						+ " </form>";
 			}
 			con.close();

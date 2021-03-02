@@ -7,8 +7,11 @@
 
  
  <%
+ 
+
  //Adding item
-if (request.getParameter("ItemCode") != null)
+  String submit = request.getParameter("btnSubmit");
+if (request.getParameter("ItemCode") != null && "Save".equals(submit))
 {
 		DBConnect itemObj = new DBConnect();
 		
@@ -22,28 +25,32 @@ if (request.getParameter("ItemCode") != null)
 		
 }
  
+
  //Deleting items
- if(request.getParameter("ItemID") != null){
+  String remove = request.getParameter("btnRemove");
+ if(request.getParameter("ItemID") != null && "Remove".equals(remove)){
 	 
 	 DBConnect deleteitem = new DBConnect();
 	 String stsMsg = deleteitem.DeleteItems(request.getParameter("ItemID"));
 	 session.setAttribute("statusMsg", stsMsg);
- } 
- /*
-if(request.getParameter("ItemID") != null && request.getParameter("ItemCode") != null){
-	 
+
+ }
+ //updating items
+ String updatebtn = request.getParameter("btnUpdate"); //getting the value of the update button in table
+ String submitupdate = request.getParameter("btnSubmit");  //getting the value of the update button in form
+ 
+ if("Update".equals(submitupdate)){
 	 DBConnect update = new DBConnect();	 
-	 out.print(update.readSelectedItem(Integer.parseInt(request.getParameter("ItemID"))));
+	 String stsMsg = update.UpdateItem(Integer.parseInt(request.getParameter("ItemID")) ,
+									    request.getParameter("ItemCode"),
+										request.getParameter("ItemName"),
+										request.getParameter("ItemPrice"),
+										request.getParameter("ItemDesc"));
+										
+		                                session.setAttribute("statusMsg", stsMsg);		
+	 }
 	 
-	 String stsMsg = itemObj.UpdateItem(Integer.parseInt(request.getParameter("ItemID") ,
-													    request.getParameter("ItemID"),
-														request.getParameter("ItemName"),
-														request.getParameter("ItemPrice"),
-														request.getParameter("ItemDesc"));
-														
-														session.setAttribute("statusMsg", stsMsg);		
-	 
- }*/
+
  
  
 %>
@@ -55,18 +62,31 @@ if(request.getParameter("ItemID") != null && request.getParameter("ItemCode") !=
 </head>
 <body>
 
+<%
+
+ //showing the details in form
+if("Update".equals(updatebtn)){
+	 
+	 DBConnect update = new DBConnect();	 
+	 out.print(update.readSelectedItem(Integer.parseInt(request.getParameter("ItemID"))));
+		 
+}else{
+	 
+	%>
+
 	<form method="post" action="AddItems.jsp">
 	
 		Item code: <input name="ItemCode" type="text"><br>
 		Item name: <input name="ItemName" type="text"><br>
 		Item price: <input name="ItemPrice" type="text"><br>
 		Item description: <input name="ItemDesc" type="text"><br>
-		<input name="action" type="hidden" value="Add">
+		
 		<input name="btnSubmit" type="submit" value="Save">
 	</form>
 
 <%
 
+}
 
 
 	    out.print(session.getAttribute("statusMsg"));
