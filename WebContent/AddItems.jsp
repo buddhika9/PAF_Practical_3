@@ -79,7 +79,9 @@ if("Update".equals(updatebtn)){
 	%>
 
 <body>
-<div class="container"><div class="row"><div class="col">
+<div class="container">
+         <div class="row">
+                 <div class="col">
 	<form method="post" action="AddItems.jsp">
 	
 		Item code: <input name="ItemCode" type="text" class="form-control"><br>
@@ -89,18 +91,23 @@ if("Update".equals(updatebtn)){
 		
 		<input name="btnSubmit" type="submit" value="Save" class="btn btn-primary">
 	</form>
- </div></div></div>
+	
+	<div class ="alert alert-success">
+	<% out.print(session.getAttribute("statusMsg")); %>
+	</div>
+	
 <%
 
-}
-
-
-	    out.print(session.getAttribute("statusMsg"));
+		}
+	   
 		DBConnect itemObj = new DBConnect();
         out.print(itemObj.readItems());
-        
-     
+            
 %>
+ 				</div>
+ 		</div> 	
+ </div>
+
 </body>
 
 
