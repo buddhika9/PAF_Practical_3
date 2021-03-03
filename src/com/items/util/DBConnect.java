@@ -121,7 +121,7 @@ public class DBConnect {
 				output += "<td><form method='post' action='AddItems.jsp'>"						
 						+ "<input name='ItemID' type='hidden' "
 						+ " value='" + itemID + "'>" 
-						+ "<input name='btnUpdate' type='submit' value='Update'>"
+						+ "<input name='btnUpdate' type='submit' value='Update' class='btn btn-danger'>"
 						+"</form></td>"
 						
 					
@@ -129,7 +129,7 @@ public class DBConnect {
 				//delete button
 						+ "<td><form method='post' action= 'AddItems.jsp'>"					
 						+ "<input name='btnRemove' "
-						+ " type='submit' value='Remove'>"	
+						+ " type='submit' value='Remove' class='btn btn-secondary'>"	
 						+ "<input name='ItemID' type='hidden' "
 						+ " value='" + itemID + "'>" 
 						
@@ -257,10 +257,10 @@ public class DBConnect {
 				String itemDesc = rs.getString("ItemDesc");
 				
 				output += "<form method=post action='AddItems.jsp'>"
-					    + "	Item code: <input name='ItemCode' type='text' value = '"+itemCode+"' ><br>"
-						+ " Item name: <input name='ItemName' type='text' value = '"+itemName+"' ><br>"
-						+ " Item price: <input name='ItemPrice' type='text'  value = '"+itemPrice+"'><br>"
-						+ " Item description: <input name='ItemDesc' type='text'  value = '"+itemDesc+"'><br>"
+					    + "	Item code: <input name='ItemCode' type='text' value = '"+itemCode+"' class='form-control'><br>"
+						+ " Item name: <input name='ItemName' type='text' value = '"+itemName+"'  class='form-control'><br>"
+						+ " Item price: <input name='ItemPrice' type='text'  value = '"+itemPrice+"' class='form-control'><br>"
+						+ " Item description: <input name='ItemDesc' type='text'  value = '"+itemDesc+"' class='form-control'><br>"
 						+ " <input name='ItemID' type='hidden' value='" + itemID + "'>"
 						+ " <input name='btnSubmit' type='submit' value= 'Update' >"
 						+ " </form>";

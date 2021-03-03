@@ -58,10 +58,14 @@ if (request.getParameter("ItemCode") != null && "Save".equals(submit))
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="Views/css/bootstrap.min.css">
 <title>Items Management</title>
 </head>
-<body>
 
+
+	   
+	  
+	 
 <%
 
  //showing the details in form
@@ -74,16 +78,18 @@ if("Update".equals(updatebtn)){
 	 
 	%>
 
+<body>
+<div class="container"><div class="row"><div class="col">
 	<form method="post" action="AddItems.jsp">
 	
-		Item code: <input name="ItemCode" type="text"><br>
-		Item name: <input name="ItemName" type="text"><br>
-		Item price: <input name="ItemPrice" type="text"><br>
-		Item description: <input name="ItemDesc" type="text"><br>
+		Item code: <input name="ItemCode" type="text" class="form-control"><br>
+		Item name: <input name="ItemName" type="text" class="form-control"><br>
+		Item price: <input name="ItemPrice" type="text" class="form-control"><br>
+		Item description: <input name="ItemDesc" type="text" class="form-control"><br>
 		
-		<input name="btnSubmit" type="submit" value="Save">
+		<input name="btnSubmit" type="submit" value="Save" class="btn btn-primary">
 	</form>
-
+ </div></div></div>
 <%
 
 }
@@ -96,4 +102,6 @@ if("Update".equals(updatebtn)){
      
 %>
 </body>
+
+
 </html>
